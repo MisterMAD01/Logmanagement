@@ -37,7 +37,7 @@
 เปิด Terminal และรัน:
 
 ```bash
-git clone https://github.com/your-username/Logmanagement.git
+git clone https://github.com/MisterMAD01/Logmanagement.git
 cd Logmanagement
 ```
 
