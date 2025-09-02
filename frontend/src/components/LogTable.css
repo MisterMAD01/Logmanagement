@@ -1,0 +1,82 @@
+/* src/components/LogTable.css */
+
+.log-table-container {
+  overflow-x: auto; /* ทำให้เกิดแถบเลื่อนแนวนอนเมื่อตารางกว้างเกินหน้าจอ */
+  -webkit-overflow-scrolling: touch; /* ปรับปรุงการเลื่อนบน iOS */
+}
+
+.log-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.log-table thead {
+  background-color: #f0f0f0;
+  color: var(--text-color);
+}
+
+.log-table th,
+.log-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.log-table tbody tr:hover {
+  background-color: #fafafa;
+}
+
+.log-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.no-logs-message {
+  text-align: center;
+  font-style: italic;
+  color: var(--text-light);
+  padding: 2rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .log-table {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .log-table thead {
+    display: none; /* ซ่อนส่วนหัวตารางบนมือถือ */
+  }
+
+  .log-table tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+  }
+
+  .log-table td {
+    display: block;
+    text-align: right;
+    border: none;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  .log-table td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 45%;
+    padding-left: 15px;
+    font-weight: bold;
+    text-align: left;
+    color: var(--text-light);
+  }
+}

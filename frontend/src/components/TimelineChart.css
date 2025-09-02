@@ -1,0 +1,8 @@
+/* src/components/TimelineChart.css */
+
+.no-data-message {
+  text-align: center;
+  font-style: italic;
+  color: var(--text-light);
+  padding: 2rem;
+}

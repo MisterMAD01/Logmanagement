@@ -1,0 +1,64 @@
+services:
+  opensearch:
+    image: opensearchproject/opensearch:2.9.0
+    container_name: opensearch
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+      - plugins.security.disabled=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - opensearch_data:/usr/share/opensearch/data
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+    networks:
+      - lognet
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:9200 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
+
+  backend:
+    build: ./backend
+    container_name: backend
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+      - "514:514/udp"
+    depends_on:
+      opensearch:
+        condition: service_healthy
+    networks:
+      - lognet
+    command: node server.js
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - backend
+    networks:
+      - lognet
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+volumes:
+  opensearch_data:
+
+networks:
+  lognet:
+    driver: bridge

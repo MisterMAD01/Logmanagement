@@ -1,0 +1,75 @@
+/* src/components/Filters.css */
+.dashboard-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: var(--secondary-bg-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  align-items: center;
+}
+
+.dashboard-filters label {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color);
+  font-size: 0.9rem;
+  font-weight: 500;
+  flex-grow: 1;
+  min-width: 150px;
+}
+
+.dashboard-filters select,
+.dashboard-filters input[type="date"] {
+  background-color: var(--primary-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 0.6rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-top: 0.4rem;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-filters select:focus,
+.dashboard-filters input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+.reset-btn {
+  background-color: #999999;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-end;
+}
+
+.reset-btn:hover {
+  background-color: #777777;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .dashboard-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-filters label {
+    min-width: 100%;
+  }
+
+  .reset-btn {
+    align-self: stretch;
+    margin-top: 1rem;
+  }
+}
